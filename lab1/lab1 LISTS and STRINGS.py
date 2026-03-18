@@ -318,6 +318,234 @@ def analyze_strings_list(words):
             seen.add(new_w)
 
     return res
+#1
+def invert_unique(d):
+    res = {}
+    for k, v in d.items():
+        if v not in res:
+            res[v] = []
+        if k not in res[v]:
+            res[v].append(k)
+    return res
+#2
+f2 = lambda s: set(
+    filter(lambda x: x > sum(s)/len(s) and x % 2 == 1 and x % 5 != 0, s)
+)
+#3
+def merge_dicts_sum(d1, d2):
+    res = {}
+    for k in d1:
+        res[k] = d1[k]
+    for k in d2:
+        if k in res:
+            res[k] += d2[k]
+        else:
+            res[k] = d2[k]
+    return res
+#4
+def filter_sets(sets_list):
+    res = []
+    for s in sets_list:
+        if len(s) > 3 and all(x >= 0 for x in s) and any(x % 2 == 0 for x in s):
+            res.append(s)
+    return res
+#5
+f5 = lambda d: sorted(d.keys(), key=lambda k: (-d[k], k))[:5]
+#6
+def deep_sum(d):
+    total = 0
+    for v in d.values():
+        if isinstance(v, int):
+            total += v
+        elif isinstance(v, list):
+            total += sum(v)
+        elif isinstance(v, dict):
+            total += deep_sum(v)
+    return total
+#7
+f7 = lambda a, b: set(x for x in (a ^ b) if x % 2 == 0)
+#8
+def sort_dict_by_value_length(d):
+    items = list(d.items())
+    items.sort(key=lambda x: (len(x[1]), x[0]))
+    return items
+#9
+def sort_dict_by_value_length(d):
+    items = list(d.items())
+    items.sort(key=lambda x: (len(x[1]), x[0]))
+    return items
+#10
+f10 = lambda d: {
+    k: sorted([x for x in v if x % 2 == 1])
+    for k, v in d.items()
+    if any(x % 2 == 1 for x in v)
+}
+#11
+def group_by_length(words):
+    res = {}
+    for w in words:
+        l = len(w)
+        if l not in res:
+            res[l] = []
+        if w not in res[l]:
+            res[l].append(w)
+    return res
+#12
+def group_by_length(words):
+    res = {}
+    for w in words:
+        l = len(w)
+        if l not in res:
+            res[l] = []
+        if w not in res[l]:
+            res[l].append(w)
+    return res
+#13
+def invert_dict_strict(d):
+    counts = {}
+    for v in d.values():
+        counts[v] = counts.get(v, 0) + 1
+
+    res = {}
+    for k, v in d.items():
+        if counts[v] == 1:
+            res[v] = k
+    return res
+#14
+def top_k_frequent(nums, k):
+    freq = {}
+    for n in nums:
+        freq[n] = freq.get(n, 0) + 1
+
+    items = list(freq.items())
+    items.sort(key=lambda x: (-x[1], x[0]))
+
+    return set([x[0] for x in items[:k]])
+#15
+f15 = lambda d: {
+    k: v for k, v in d.items()
+    if v >= sum(d.values())/len(d) and v % 2 == 1
+}
+#16
+def update_counts(d, items):
+    for x in items:
+        d[x] = d.get(x, 0) + 1
+    return d
+#17
+f17 = lambda a, b, c: (a & b) - c
+#18
+def sort_dict_by_value_sum(d):
+    items = []
+    for k, v in d.items():
+        items.append((k, sum(v)))
+    items.sort(key=lambda x: (-x[1], x[0]))
+    return items
+#19
+def filter_by_digit_sum(nums):
+    res = set()
+    for n in nums:
+        s = sum(int(d) for d in str(abs(n)))
+        if s % 2 == 0 and n % 2 == 1:
+            res.add(n)
+    return res
+#20
+def filter_by_digit_sum(nums):
+    res = set()
+    for n in nums:
+        s = sum(int(d) for d in str(abs(n)))
+        if s % 2 == 0 and n % 2 == 1:
+            res.add(n)
+    return res
+#21
+def count_leaf_values(d):
+    count = 0
+    for v in d.values():
+        if isinstance(v, dict):
+            count += count_leaf_values(v)
+        elif isinstance(v, list):
+            count += len(v)
+        else:
+            count += 1
+    return count
+#22
+f22 = lambda a, b: set(
+    x for x in a if x > sum(b)/len(b) and x not in b
+)
+#23
+def group_by_last_letter(words):
+    res = {}
+    for w in words:
+        key = w[-1]
+        if key not in res:
+            res[key] = []
+        if w not in res[key]:
+            res[key].append(w)
+    return res
+#24
+def union_of_filtered_sets(sets_list):
+    res = set()
+    for s in sets_list:
+        for x in s:
+            if x > 10 and x % 2 == 1:
+                res.add(x)
+    return res
+#25
+import math
+
+f25 = lambda d: {
+    k: math.prod([x for x in v if x > 0])
+    for k, v in d.items()
+    if any(x > 0 for x in v)
+}
+#26
+def remove_elements_with_common_digits(s):
+    digit_map = {}
+    for num in s:
+        for d in set(str(abs(num))):
+            digit_map.setdefault(d, []).append(num)
+
+    bad = set()
+    for nums in digit_map.values():
+        if len(nums) > 1:
+            bad.update(nums)
+
+    return set(x for x in s if x not in bad)
+#27
+def remove_elements_with_common_digits(s):
+    digit_map = {}
+    for num in s:
+        for d in set(str(abs(num))):
+            digit_map.setdefault(d, []).append(num)
+
+    bad = set()
+    for nums in digit_map.values():
+        if len(nums) > 1:
+            bad.update(nums)
+
+    return set(x for x in s if x not in bad)
+#28
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return False
+    return True
+
+f27 = lambda d: {k: v for k, v in d.items() if is_prime(v) and len(k) % 2 == 1}
+#29
+f29 = lambda d: sorted(d.keys(), key=lambda k: (d[k] % 10, k))
+#30
+def partition_by_sum_parity(s):
+    even = set()
+    odd = set()
+    for n in s:
+        ssum = sum(int(d) for d in str(abs(n)))
+        if ssum % 2 == 0:
+            even.add(n)
+        else:
+            odd.add(n)
+    return (even, odd)
 #31
 f31 = lambda d: {
     k: v for k, v in d.items()
